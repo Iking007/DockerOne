@@ -1,0 +1,23 @@
+version: '3'
+services:
+  web-server:
+    build: /docker
+    restart: always
+    volumes:
+      - './files/:/var/www/html/'
+    ports:
+      - "8080:80"
+
+  db:
+    image: mysql:8.0.19
+    container_name: appDB
+    restart: always
+    environment:
+ #     MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: root
+ #     MYSQL_DATABASE: appDB
+ #     MYSQL_USER: Roslov
+    volumes:
+      - './database:/docker-entrypoint-initdb.d'
+volumes:
+  mysql-data:
